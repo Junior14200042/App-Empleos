@@ -12,4 +12,6 @@ public interface IcategoriasService {
     void guardar(Categoria categoria);
 
     Categoria buscarPorId(Integer id);
+
+    void eliminar(Integer id);
 }

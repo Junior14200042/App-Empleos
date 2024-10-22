@@ -32,12 +32,30 @@ public class CategoriaController {
         return "categorias/listCategorias";
     }
 
+
     @RequestMapping(value = "/create",method = RequestMethod.GET)
-    public String crear(){
+    public String crear(Model model){
+        model.addAttribute("categoria", new Categoria());
+        return "categorias/formCategoria";
+    }
+
+
+    @GetMapping("/edit/{id}")
+    public String editar(@PathVariable Integer id, Model model ){
+
+        Categoria categoria= categoriasServices.buscarPorId(id);
+        model.addAttribute("categoria",categoria);
+
 
         return "categorias/formCategoria";
     }
 
+    @GetMapping("/delete/{id}")
+    public String eliminar(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("msg","Se eliminó correctamente");
+        categoriasServices.eliminar(id);
+        return "redirect:/categorias/index";
+    }
 
 
     @PostMapping("/save")

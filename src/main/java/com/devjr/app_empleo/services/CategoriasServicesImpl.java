@@ -57,4 +57,9 @@ public class CategoriasServicesImpl implements IcategoriasService {
     public Categoria buscarPorId(Integer id) {
         return null;
     }
+
+    @Override
+    public void eliminar(Integer id) {
+        System.out.println("se eliminó");
+    }
 }
