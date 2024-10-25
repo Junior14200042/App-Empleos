@@ -1,10 +1,10 @@
 package com.devjr.app_empleo.controllers;
 
 import com.devjr.app_empleo.model.Categoria;
-import com.devjr.app_empleo.services.CategoriasServicesImpl;
 import com.devjr.app_empleo.services.IcategoriasService;
-import com.devjr.app_empleo.services.VacantesServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +12,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -28,6 +27,15 @@ public class CategoriaController {
         List<Categoria> lista= categoriasServices.listCategorias();
 
         model.addAttribute("categorias",lista);
+
+        return "categorias/listCategorias";
+    }
+
+    @GetMapping("/indexPaginate")
+    public String indexPaginado(Model model, Pageable page){
+
+        Page<Categoria> listaCategorias= categoriasServices.indexPagination(page);
+        model.addAttribute("categorias",listaCategorias);
 
         return "categorias/listCategorias";
     }
@@ -54,7 +62,7 @@ public class CategoriaController {
     public String eliminar(@PathVariable Integer id, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("msg","Se eliminó correctamente");
         categoriasServices.eliminar(id);
-        return "redirect:/categorias/index";
+        return "redirect:/categorias/indexPaginate";
     }
 
 
@@ -70,6 +78,6 @@ public class CategoriaController {
         attributes.addFlashAttribute("msg","Se guardó correctamente");
         categoriasServices.guardar(categoria);
 
-        return "redirect:/categorias/index";
+        return "redirect:/categorias/indexPaginate";
     }
 }

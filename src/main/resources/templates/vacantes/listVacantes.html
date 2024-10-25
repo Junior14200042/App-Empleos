@@ -46,7 +46,7 @@
                     <tr>
                         <td th:text="${vacantes.categoria.nombre}"></td>
                         <td th:text="${vacantes.nombre}"></td>
-                        <td th:text="${vacantes.fecha}"></td>
+                        <td th:text="${#dates.format(vacantes.fecha, 'dd-MM-yyyy')}"></td>
                         <td th:text="${vacantes.estatus}"></td>
                         <td th:if="${vacantes.destacado==1}">Si</td>
                         <td th:unless="${vacantes.destacado==1}">No</td>
@@ -58,6 +58,20 @@
 
                     </tbody>
                 </table>
+                <nav th:if="${vacantes.totalPages > 0}" aria-label="Page navigation example" >
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${vacantes.number == 0 ? 'disabled' : ''}">
+                            <a th:href="@{/vacantes/indexPaginate(page=${vacantes.number - 1})}" class="page-link">Anterior</a>
+                        </li>
+
+                        <li class="page-item" th:classappend="${i eq vacantes.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, vacantes.totalPages, 1)}">
+                            <a class="page-link" th:href="@{/vacantes/indexPaginate?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+                        </li>
+                        <li class="page-item" th:classappend="${vacantes.number == (vacantes.totalPages - 1) ? 'disabled' : ''}">
+                            <a th:href="@{/vacantes/indexPaginate(page=${vacantes.number + 1})}" class="page-link">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
 
             </div>
         </div>

@@ -27,12 +27,16 @@ public class Vacante {
     private Date fecha;
     private Double salario;
     private Integer destacado;
-    private String imagen="no-imagen.png";
+    private String imagen;
     private String estatus;
     private String detalles;
     @OneToOne()
     @JoinColumn(name = "idCategoria")
     private Categoria categoria;
 
+
+    public void reset(){
+        this.imagen=null;
+    }
 
 }

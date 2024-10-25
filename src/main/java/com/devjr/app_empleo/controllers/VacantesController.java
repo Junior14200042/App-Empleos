@@ -8,6 +8,8 @@ import com.devjr.app_empleo.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,6 +45,14 @@ public class VacantesController {
         return "vacantes/listVacantes";
     }
 
+    @GetMapping("/indexPaginate")
+    public String mostrarIndexPaginado(Model model, Pageable page){
+        Page<Vacante> lista = vacantesServices.buscarTodas(page);
+        model.addAttribute("vacantes",lista);
+        return "vacantes/listVacantes";
+    }
+
+
     @GetMapping("/create")
     public String crear(Vacante vacante, Model model) {
 
@@ -73,7 +83,7 @@ public class VacantesController {
         System.out.println(vacante);
         vacantesServices.guardar(vacante);
         attributes.addFlashAttribute("msg", "Registro guardado exitosamente");
-        return "redirect:/vacantes/index";
+        return "redirect:/vacantes/indexPaginate";
 
     }
     @GetMapping("/edit/{id}")

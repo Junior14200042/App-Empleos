@@ -5,6 +5,8 @@ import com.devjr.app_empleo.repository.CategoriasRepository;
 import com.devjr.app_empleo.services.IcategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +41,11 @@ public class CategoriasServiceJpa implements IcategoriasService {
     @Override
     public void eliminar(Integer id) {
         categoriasRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Categoria> indexPagination(Pageable page) {
+        return categoriasRepository.findAll(page);
     }
 
 
