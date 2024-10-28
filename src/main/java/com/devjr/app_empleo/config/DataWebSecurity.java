@@ -28,6 +28,8 @@ public class DataWebSecurity {
                     auth.requestMatchers("/", "/signup", "/search" ,"/vacantes/view/**").permitAll();
 
                     auth.requestMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR");
+                    auth.requestMatchers("/solicitudes/create/**","/solicitudes/save/**").hasAnyAuthority("USUARIO");
+                    auth.requestMatchers("/solicitudes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR");
                     auth.requestMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR");
                     auth.requestMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR");
 

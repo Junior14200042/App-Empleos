@@ -11,8 +11,13 @@ public class webConfig implements WebMvcConfigurer {
     @Value("${empleosapp.ruta.imagenes}")
     public String rutaImagen;
 
+    @Value("${empleosapp.ruta.cv}")
+    public String rutaCV;
+
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/logos/**").addResourceLocations("file:"+rutaImagen);
+
+        registry.addResourceHandler("/cv/**").addResourceLocations("file:"+rutaCV);
     }
 
 }

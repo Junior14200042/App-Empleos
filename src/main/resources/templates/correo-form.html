@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>EmpleosApp | Listado de Ofertas de Trabajo</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+<header th:replace="fragments/menu::menu-principal">
+
+</header>
+
+    <!--<form  th:action="@{/solicitudes/enviar-correo}" method="post">
+    <div>
+        <label for="to">Para:</label>
+        <input type="email" id="to" name="to" required />
+    </div>
+    <div>
+        <label for="subject">Asunto:</label>
+        <input type="text" id="subject" name="subject" required />
+    </div>
+    <div>
+        <label for="message">Mensaje:</label>
+        <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit">Enviar</button>
+
+    <div th:if="${mensaje}">
+        <p th:text="${mensaje}" style="color: green;"></p>
+    </div>-->
+
+<!--</form>-->
+<div class="container mt-5">
+    <div class="form-container">
+        <h2>Enviar Correo</h2>
+        <form th:action="@{/solicitudes/enviar-correo}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" th:value="${solicitud.usuario.nombre}"  required disabled>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo electrónico:</label>
+                <input type="hidden" name="to" th:value="${solicitud.usuario.email}" />
+                <input type="email" class="form-control" id="correo" name="to" th:value="${solicitud.usuario.email}" required disabled>
+            </div>
+            <div>
+                <label for="subject">Asunto:</label>
+                <input type="text" class="form-control" id="subject" name="subject" required />
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje:</label>
+                <textarea class="form-control" id="mensaje" name="message" rows="4" placeholder="Escriba su mensaje aquí" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
