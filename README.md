@@ -49,7 +49,7 @@ Este proyecto es una aplicación que realiza la búsqueda de empleo mediante una
       <img src="https://drive.google.com/uc?export=view&id=1hePyYirkYzDe4aLxDKdMJBjle5mQvr3V" alt="400" width="400" />
     </td>
     <td>
-      <h4>Listado de Empleados</h4>
+      <h4>Listado de solicitudes por Usuario</h4>
       <img src="https://drive.google.com/uc?export=view&id=1o5xpkf9YGTi1Ez_WTPI47fKRsQtsadGk" alt="400" width="400" />
     </td>
   </tr>
