@@ -41,11 +41,6 @@ public class HomeController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @GetMapping("/bcrypt/{texto}")
-    @ResponseBody
-    public String encriptar(@PathVariable("texto") String texto){
-        return texto+" Encriptado en "+passwordEncoder.encode(texto);
-    }
     @GetMapping("/login")
     public String mostrarLogin(){
         return "formLogin";

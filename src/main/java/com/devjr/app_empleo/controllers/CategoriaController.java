@@ -21,16 +21,6 @@ public class CategoriaController {
     @Autowired
     IcategoriasService categoriasServices;
 
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String mostrarIndex(Model model){
-
-        List<Categoria> lista= categoriasServices.listCategorias();
-
-        model.addAttribute("categorias",lista);
-
-        return "categorias/listCategorias";
-    }
-
     @GetMapping("/indexPaginate")
     public String indexPaginado(Model model, Pageable page){
 
